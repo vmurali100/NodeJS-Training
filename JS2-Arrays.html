@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var users = ["Murali","Krishna","Ram","Ravi","Sam","Taj","Sai"]
+
+        //PUSH 
+       // users.push("Kiran")
+
+        //POP
+       // users.pop()
+       
+       
+       //SHIFT
+       //users.shift()
+
+
+        //UNSHIFT
+        //users.unshift("Sai Krishna")
+
+
+        //SPLICE
+
+        //users.splice(2,1)
+        //users.splice(2,1,"Suresh")
+
+
+        //FILTER
+       /* var filterNames = users.filter(function (a,b,c){
+            return a.length==3
+            //console.log(a)
+            //console.log(b)
+           // console.log(c)
+        })
+        console.log(filterNames)*/
+
+        //FIND
+        //var filterNames = users.find(function (user){
+        //    return user.length == 3
+        //})
+
+       // console.log(filterNames)
+
+        //FOREACH
+
+      /* var forEachUsers =  users.forEach(function (user){
+            return user+"_BLR"
+
+        })
+
+        console.log("forEachUsers",forEachUsers)
+        //MAP
+
+       var filteredUsers = users.map(function (user){
+            return user+"_BLR"
+        })
+        console.log("Map Users",filteredUsers) */
+       
+        //EVERY
+
+     /*  var userCheck =  users.every(function (user){
+            return user.length >=3
+        })*/
+
+
+        var userCheck = users.some(function (user){
+            return user.length ==6
+        })
+        //SOME
+        console.log(userCheck)
+
+        document.write(users)
+    </script>
+</body>
+</html>

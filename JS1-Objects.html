@@ -7,6 +7,33 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+        //Types of Creating An Objects 
+        var person = {}
+
+        var person2 = new Object() // Built in method to Create a Object
+
+
+        function Person(fname,lname){ // With Constructor Function
+            this.fname=fname;
+            this.lname=lname;
+        }
+
+        var person1= new Person("Murali","Krishna");
+        console.log(person1)
+
+        class Employee{
+            constructor(fname,lname){
+                this.fname = fname;
+                this.lname = lname
+            }
+        }
+
+        var emp = new Employee("Ram","Krishna");
+
+        console.log(emp)
+        console.log(person)
+        console.log(person2)
+    </script>
 </body>
 </html>
