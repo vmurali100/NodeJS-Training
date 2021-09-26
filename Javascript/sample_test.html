@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var query = "[{)(}]";
+
+      function checkExpression(query) {
+        let valid ;
+        var splitExpression = query.split("");
+
+        if(query.length%2==1){
+            valid = false 
+        }
+
+      //  splitExpression.forEach((exp, i) => {
+        //  console.log(exp);
+      
+          /*if(splitExpression[i] == "["){
+              if(splitExpression[splitExpression.length - (i + 1)] != "]"){
+                valid = false;
+              }
+          }else if(splitExpression[i] == "{"){
+            if(splitExpression[splitExpression.length - (i + 1)] != "}"){
+                valid = false;
+              }
+          }else if(splitExpression[i] == "("){
+            if(splitExpression[splitExpression.length - (i + 1)] != ")"){
+                valid = false;
+              }
+          }*/
+       // });
+
+        return valid;
+      }
+      
+      console.log(checkExpression(query))
+    </script>
+  </body>
+</html>

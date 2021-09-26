@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="fname">First Name :</label>
+        <input type="text" name="" id="fname"> <br>
+        <label for="lname">Last Name :</label>
+        <input type="text" name="" id="lname"> <br>
+
+        <button type="button" onclick="createUser()" id="add">Add User</button>
+        <button type="button" onclick="updateUser()" id="update" style="display: none;">Update User</button>
+        
+    </form>
+
+    <hr>
+    <br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+    </table>
+    <button onclick="getDataFromServer()">Get Data From Server</button>
+    <script>
+        // AJAX 
+        // Asynchronous javascript And XML
+        var users =[]
+       
+       
+        function getDataFromServer(){
+            var getInfo = new XMLHttpRequest()
+            getInfo.onreadystatechange = function(){
+                if(getInfo.readyState == 4 && getInfo.status ==200){
+                    //JSON.stringify and JSON.parse
+                    users = JSON.parse(getInfo.response)
+                    displayUsers ()
+                }
+            }
+            getInfo.open("GET","http://localhost:3000/users")
+            getInfo.send()
+        }
+       
+       getDataFromServer()
+
+        
+        function displayUsers (){
+            //document.createElement
+            
+            users.forEach(function (obj,i){
+                console.log(obj)
+                var myTr = document.createElement("tr")
+
+                var td1 = document.createElement("td")
+                td1.innerHTML = obj.fname
+                myTr.appendChild(td1)
+
+                var td2 = document.createElement("td")
+                td2.innerHTML = obj.lname
+                myTr.appendChild(td2)
+
+                var editTd = document.createElement("td")
+                var editBtn = document.createElement("button");
+                editBtn.setAttribute("onclick","editUser("+i+")")
+                editBtn.innerHTML = "Edit User"
+                editTd.appendChild(editBtn)
+                myTr.appendChild(editTd)
+
+                var deleteTd = document.createElement("td")
+                var deleteBtn = document.createElement("button")
+                deleteBtn.setAttribute("onclick","deleteUser("+i+")")
+                deleteBtn.innerHTML = "Delete User"
+                deleteTd.appendChild(deleteBtn)
+                myTr.appendChild(deleteTd)
+
+                document.querySelector("tbody").appendChild(myTr)
+
+            })
+        }
+
+        function createUser(){
+            var newUser = captureData();
+            var userInfo = new XMLHttpRequest()
+            userInfo.onreadystatechange = function(){
+                if(userInfo.readyState == 4 && userInfo.status == 201){
+                    console.log("User Added Successfully")
+                }
+            }
+            userInfo.open("POST","http://localhost:3000/users")
+            userInfo.setRequestHeader("Content-Type","application/json")
+            userInfo.send(JSON.stringify(newUser))
+        }
+
+        function deleteUser(i){
+            var userInfo = new XMLHttpRequest()
+            userInfo.onreadystatechange = function(){
+                if(userInfo.readyState == 4 && userInfo.status == 200){
+                    console.log("User Added Successfully");
+                    displayUsers ()
+                }
+            }
+            userInfo.open("DELETE","http://localhost:3000/users/"+users[i].id)
+            userInfo.send()
+        }
+        var index ;
+        function editUser(i){
+            index=i
+            var newUser = captureData()
+
+            for(a in newUser){
+                document.getElementById(a).value = users[i][a]
+            }
+            document.getElementById("add").style.display="none"
+            document.getElementById("update").style.display="block"
+            
+        }
+
+        function updateUser(){
+            var newUser = captureData()
+            var userInfo = new XMLHttpRequest()
+            userInfo.onreadystatechange = function(){
+                if(userInfo.readyState == 4 && userInfo.status == 200){
+                    console.log("User Added Successfully");
+                    displayUsers ()
+                }
+            }
+            userInfo.open("PUT","http://localhost:3000/users/"+users[index].id)
+            userInfo.setRequestHeader("Content-Type","application/json")
+            userInfo.send(JSON.stringify(newUser))
+        }
+       
+        function captureData(){
+            var user = {
+                fname:document.getElementById("fname").value,
+                lname:document.getElementById("lname").value
+            }
+
+            return user
+        }
+    </script>
+</body>
+</html>
