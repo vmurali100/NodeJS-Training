@@ -12,6 +12,7 @@
         <input type="text" name="" id="fname"> <br>
         <label for="lname">Last Name :</label>
         <input type="text" name="" id="lname"> <br>
+        <input type="text" name="" id="id" hidden> <br>
 
         <button type="button" onclick="createUser()" id="add">Add User</button>
         <button type="button" onclick="updateUser()" id="update" style="display: none;">Update User</button>
@@ -45,7 +46,8 @@
             getInfo.onreadystatechange = function(){
                 if(getInfo.readyState == 4 && getInfo.status ==200){
                     //JSON.stringify and JSON.parse
-                    users = JSON.parse(getInfo.response)
+                    let details = JSON.parse(getInfo.response)
+                    users = details.data
                     displayUsers ()
                 }
             }
@@ -58,7 +60,7 @@
         
         function displayUsers (){
             //document.createElement
-            
+            document.querySelector("tbody").innerHTML=""
             users.forEach(function (obj,i){
                 console.log(obj)
                 var myTr = document.createElement("tr")
@@ -94,11 +96,13 @@
             var newUser = captureData();
             var userInfo = new XMLHttpRequest()
             userInfo.onreadystatechange = function(){
-                if(userInfo.readyState == 4 && userInfo.status == 201){
-                    console.log("User Added Successfully")
+                if(userInfo.readyState == 4 && userInfo.status == 200){
+                    let details = JSON.parse(userInfo.response)
+                    users= details.data
+                    displayUsers()
                 }
             }
-            userInfo.open("POST","http://localhost:3000/users")
+            userInfo.open("POST","http://localhost:3000/users/createUser")
             userInfo.setRequestHeader("Content-Type","application/json")
             userInfo.send(JSON.stringify(newUser))
         }
@@ -107,11 +111,13 @@
             var userInfo = new XMLHttpRequest()
             userInfo.onreadystatechange = function(){
                 if(userInfo.readyState == 4 && userInfo.status == 200){
-                    console.log("User Added Successfully");
+                    console.log(JSON.parse(userInfo.response));
+                    let details = JSON.parse(userInfo.response)
+                    users = details.data
                     displayUsers ()
                 }
             }
-            userInfo.open("DELETE","http://localhost:3000/users/"+users[i].id)
+            userInfo.open("DELETE","http://localhost:3000/users/deleteUser/"+users[i].id)
             userInfo.send()
         }
         var index ;
@@ -132,11 +138,12 @@
             var userInfo = new XMLHttpRequest()
             userInfo.onreadystatechange = function(){
                 if(userInfo.readyState == 4 && userInfo.status == 200){
-                    console.log("User Added Successfully");
+                    let details = JSON.parse(userInfo.response)
+                    users = details.data
                     displayUsers ()
                 }
             }
-            userInfo.open("PUT","http://localhost:3000/users/"+users[index].id)
+            userInfo.open("PUT","http://localhost:3000/users/updateUser/"+users[index].id)
             userInfo.setRequestHeader("Content-Type","application/json")
             userInfo.send(JSON.stringify(newUser))
         }
@@ -144,7 +151,8 @@
         function captureData(){
             var user = {
                 fname:document.getElementById("fname").value,
-                lname:document.getElementById("lname").value
+                lname:document.getElementById("lname").value,
+                id:document.getElementById("id").value
             }
 
             return user
