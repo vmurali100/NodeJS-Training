@@ -1,0 +1,29 @@
+[
+    {
+        "fname": "Renee",
+        "lname": "Truth",
+        "tel": "(804)560-2639",
+        "address": "4114 Molestie Rd",
+        "city": "Panama City",
+        "state": "NJ",
+        "zip": 78002
+    },
+    {
+        "fname": "Constance",
+        "lname": "Creason",
+        "tel": "(338)678-0061",
+        "address": "6088 Amet Ct",
+        "city": "Birmingham",
+        "state": "IN",
+        "zip": 52516
+    },
+    {
+        "fname": "Marla",
+        "lname": "Comeau",
+        "tel": "(843)699-8750",
+        "address": "803 Dui St",
+        "city": "Johnson County",
+        "state": "WI",
+        "zip": 82777
+    }
+]
