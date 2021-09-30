@@ -1,6 +1,6 @@
 const { exec } = require("child_process");
 
-exec('find /',(error,stdout,stderr)=>{
+exec('dir',(error,stdout,stderr)=>{
     if(error){
         console.log(`Error : ${error.message}`)
         return

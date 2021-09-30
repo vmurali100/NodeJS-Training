@@ -2,7 +2,7 @@ const axios = require('axios');
 
 axios.get('https://jsonplaceholder.typicode.com/users')
   .then(response => {
-    console.log(response);
+    console.log(response.data.length);
   })
   .catch(error => {
     console.log(error);
