@@ -12,7 +12,7 @@ var authRouter=require('./routes/auth')
 var app = express();
 dotenv.config()
 
-mongoose.connect(process.env.DB_CONNECT,()=>{
+mongoose.connect(process.env.DB_CLOUD_CONNECT,()=>{
   console.log("Database Connected")
 })
 // view engine setup

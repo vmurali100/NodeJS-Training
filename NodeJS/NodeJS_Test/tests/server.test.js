@@ -18,7 +18,7 @@ afterEach((done) => {
 
 
 test("GET /api/posts", async () => {
-  const post = await Post.create({ title: "Post 1", content: "Lorem ipsum" });
+  const post = await Post.create({ title: "Post 1", content: "Lorem ipsum" });// Creating a POST
   await supertest(app).get("/api/posts")
     .expect(200)
     .then((response) => {

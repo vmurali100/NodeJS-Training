@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mongoose = require('mongoose')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -22,15 +21,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-// MongoDB local referance
-let mongodbUri="mongodb://localhost/sampleusers"; // Local Database
-let mongodbUri="mongodb+srv://murali:murali@cluster0.j38lu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-
-
-mongoose.connect(mongodbUri,()=>{
-  console.log("Connected to DB")
-})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
